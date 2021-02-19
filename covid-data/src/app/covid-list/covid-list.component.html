@@ -1,0 +1,38 @@
+<input type="text" [(ngModel)] ="currentPage" placeholder="Enter page number"><br>
+Change Page Size:
+<select name="itemsPerPage" id="itemsPerPage" (change)="SelectChanged($event.target.value)">
+    <option value="10" selected>10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>
+    <option value="40">40</option>
+  </select><br>
+<table>
+    <tr>
+      <th>ID</th>
+      <th>Country</th>
+      <th>CountryCode</th>
+      <th>Date</th>
+      <th>NewConfirmed</th>
+      <th>NewDeaths</th>
+      <th>NewRecovered</th>
+      <th>Slug</th>
+      <th>TotalConfirmed</th>
+      <th>TotalDeaths</th>
+      <th>TotalRecovered</th>
+    </tr>
+    <tr *ngFor="let d of coviddata | paginate: { itemsPerPage: pageSize, currentPage: currentPage,totalItems: total }">
+      <td>{{d.ID}}</td>
+      <td>{{d.Country}}</td>
+      <td>{{d.CountryCode}}</td>
+      <td>{{d.Date}}</td>
+      <td>{{d.NewConfirmed}}</td>
+      <td>{{d.NewDeaths}}</td>
+      <td>{{d.NewRecovered}}</td>
+      <td>{{d.Slug}}</td>
+      <td>{{d.TotalConfirmed}}</td>
+      <td>{{d.TotalDeaths}}</td>
+      <td>{{d.TotalRecovered}}</td>
+    </tr>
+  </table>
+  <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+
